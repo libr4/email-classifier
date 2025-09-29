@@ -27,10 +27,11 @@ export default function App() {
   useEffect(() => { fetchHealth().then((h) => { setHealth(h); setOffline(false); }).catch(() => setOffline(true)); }, []);
   useEffect(() => { scrollToBottom(); }, [pairs]);
   useEffect(() => {
-    if ((import.meta as any).env?.MODE !== "production") { 
+  if (import.meta.env.MODE !== "production") {
     runDevSelfTests();
   }
 }, []);
+
 
 
   const totalItemPairs = useMemo(() => pairs.reduce((acc, p) => acc + p.bots.filter((b) => !('loading' in b && b.loading)).length, 0), [pairs]);
